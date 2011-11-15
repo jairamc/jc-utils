@@ -3,10 +3,8 @@ package me.jairam.utils;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.apache.commons.net.*;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
@@ -130,7 +128,7 @@ public class GetFilesFromFTP
 		FTPFile[] files;
 		if(url.getPath() != null)
 		{ 
-			files = ftp.listFiles(url.toString());
+			files = ftp.listFiles(url.getPath());
 		}
 		else
 		{
@@ -141,7 +139,9 @@ public class GetFilesFromFTP
 
 		if(files == null)
 		{
-
+			fos = new FileOutputStream(localDirectory.getAbsolutePath()+File.pathSeparatorChar+url.getFile());
+			ftp.retrieveFile(url.getPath(), fos);
+			fos.close();
 		}
 		else
 		{

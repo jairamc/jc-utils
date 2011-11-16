@@ -1,4 +1,4 @@
-package me.jairam.utils;
+package me.jairam.utils.network;
 
 import java.io.File;
 import java.io.FileOutputStream;
